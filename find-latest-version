@@ -28,7 +28,7 @@ sub _get_required {
 
     my $url     = $latest->{assets}[0]{browser_download_url};
     my $name    = $latest->{assets}[0]{name};
-    my $version = $latest->{tag_name};
+    my $version = $latest->{tag_name};                          # They do use some semi-unusual tags which could potentially confuse `et update`.
     $version =~ s/^v//;
 
     return ( $version, $url, $name );
@@ -49,4 +49,6 @@ __END__
 =head1 README
 
 This is a Github project. The latest version is listed as a tag in the project.
+
+They do use some semi-unusual tags which could potentially confuse `et update`.
 

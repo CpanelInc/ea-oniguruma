@@ -2,18 +2,18 @@
 %define pkg_base  oniguruma
 %define pkg_name  %{ns_prefix}-%{pkg_base}
 %define _prefix   /opt/cpanel/%{pkg_name}
-%define _fullvernum 6.9.7.1
-%define _vernum     6.9.7
+%define _fullvernum %{version}.%{release_prefix}
+%define _vernum     %{version}
 
 Summary:   oniguruma is a regular expression library
 Name:      %{pkg_name}
-Version:   6.9.7.1
+Version:   6.9.8
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4554 for more details
 %define release_prefix 1
 
 Release:   %{release_prefix}%{?dist}.cpanel
 License:   BSD
-Source:    onig-%{_fullvernum}.tar.gz
+Source:    onig-%{version}.tar.gz
 Vendor:    cPanel, Inc.
 Group:     System Environment/Libraries
 Provides:  oniguruma = %{version}-%{release}
@@ -82,6 +82,9 @@ ldconfig
 %{_includedir}/oniguruma.h
 
 %changelog
+* Mon May 02 2022 Cory McIntire <cory@cpanel.net> - 6.9.8-1
+- EA-10674: Update ea-oniguruma from v6.9.7.1 to v6.9.8
+
 * Fri Apr 23 2021 Cory McIntire <cory@cpanel.net> - 6.9.7.1-1
 - EA-9708: Update ea-oniguruma from v6.9.6 to v6.9.7.1
 

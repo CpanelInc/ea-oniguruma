@@ -22,7 +22,7 @@ sub _get_required {
     my ($http) = @_;
 
     my $res    = $http->get("https://api.github.com/repos/kkos/oniguruma/releases/latest");
-    my $latest = ea4_tool::util::json2ref( $res->content );
+    my $latest = ea4_tool::util::json2ref( $res->{content} );
 
     my $url     = $latest->{assets}[0]{browser_download_url};
     my $name    = $latest->{assets}[0]{name};

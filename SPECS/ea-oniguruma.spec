@@ -9,14 +9,14 @@ Summary:   oniguruma is a regular expression library
 Name:      %{pkg_name}
 Version:   6.9.9
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4554 for more details
-%define release_prefix 1
+%define release_prefix 2
 
 Release:   %{release_prefix}%{?dist}.cpanel
 License:   BSD
 Source:    onig-%{version}.tar.gz
 Vendor:    cPanel, Inc.
 Group:     System Environment/Libraries
-Provides:  oniguruma = %{version}-%{release}
+AutoReqProv: no
 
 %description
 Oniguruma is a modern and flexible regular expressions library. It encompasses features from different regular expression implementations that traditionally exist in different languages.
@@ -30,7 +30,7 @@ ASCII, UTF-8, UTF-16BE, UTF-16LE, UTF-32BE, UTF-32LE, EUC-JP, EUC-TW, EUC-KR, EU
 %package devel
 Summary: Development files of the oniguruma regular expression library
 Group: Development/Libraries
-Provides: oniguruma-devel = %{version}-%{release}
+AutoReqProv: no
 Requires: ea-oniguruma = %{version}-%{release}
 
 %description devel
@@ -52,6 +52,7 @@ make
 rm -rf $RPM_BUILD_ROOT
 
 make DESTDIR=$RPM_BUILD_ROOT install
+find $RPM_BUILD_ROOT -name 'onig-config' -exec rm -rf {} +
 
 mkdir -p ${RPM_BUILD_ROOT}/%{_docdir}
 mkdir -p ${RPM_BUILD_ROOT}/opt/cpanel/ea-oniguruma/include
@@ -71,7 +72,7 @@ ldconfig
 
 %files
 %dir /opt/cpanel/ea-oniguruma
-/opt/cpanel/ea-oniguruma/bin
+%dir /opt/cpanel/ea-oniguruma/bin
 
 %files devel
 %dir /opt/cpanel/ea-oniguruma/share
@@ -82,6 +83,9 @@ ldconfig
 %{_includedir}/oniguruma.h
 
 %changelog
+* Mon Aug 26 2024 Cory McIntire <cory@cpanel.net> - 6.9.9-2
+- EA-12204: Prevent objects from being advertised to non-cPanel binaries
+
 * Mon Oct 16 2023 Cory McIntire <cory@cpanel.net> - 6.9.9-1
 - EA-11748: Update ea-oniguruma from v6.9.8 to v6.9.9
 

@@ -7,9 +7,9 @@
 
 Summary:   oniguruma is a regular expression library
 Name:      %{pkg_name}
-Version:   6.9.9
+Version:   6.9.10
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4554 for more details
-%define release_prefix 2
+%define release_prefix 1
 
 Release:   %{release_prefix}%{?dist}.cpanel
 License:   BSD
@@ -83,6 +83,9 @@ ldconfig
 %{_includedir}/oniguruma.h
 
 %changelog
+* Tue Dec 31 2024 Cory McIntire <cory@cpanel.net> - 6.9.10-1
+- EA-12622: Update ea-oniguruma from v6.9.9 to v6.9.10
+
 * Mon Aug 26 2024 Cory McIntire <cory@cpanel.net> - 6.9.9-2
 - EA-12204: Prevent objects from being advertised to non-cPanel binaries
 
